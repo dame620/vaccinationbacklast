@@ -26,6 +26,25 @@ class RendezvousController extends AbstractController
       
        $use = $data->setUser($userconnecte);
       // dd($use);
+      $poid= $data->getPoid();
+      //recuperation libelle action
+      $libaction= $data->getAction()->getLibelleaction();
+      //planifier un rv en passant libaction rv comment libellé action
+      if($poid == null){
+      
+    $data->setLibactionrv($libaction);
+    $dat= $data->getLibactionrv();
+         }
+//dd($dat);
+
+    //passer etat rv à true si il s'agit d'un rv effectuer  
+   if($poid !== null){
+    $data->setEtatrv(true);
+  
+     }
+
+//dd($data);
+
        return $data;
 
     }

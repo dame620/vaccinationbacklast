@@ -9,30 +9,67 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * 
+ * normalizationContext={"groups"={"readeraction"}},
+ * denormalizationContext={"groups"={"writeraction"}},
+ *
+ * collectionOperations={
+ * 
+ * 
+ * "POST"={
+ *    
+ * 
+ *      },
+ * 
+ * "GETALLUSER"={
+ * "method"="GET",
+ *
+ *   }
+ * },
+ * 
+ * itemOperations={
+ *    
+ * "recuperationadmin"={
+ *      "method"="GET",
+ *      
+ * },
+ 
+ * "PUT"={
+ 
+ * },
+ * } 
+
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
  */
 class Action
 {
     /**
      * @ORM\Id()
+     * @Groups({"readeraction", "writeraction"})
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
+     * 
      * @ORM\OneToMany(targetEntity="App\Entity\Rendezvous", mappedBy="action")
      */
     private $rendezvouses;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
+     * @Groups({"readeraction", "writeraction"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="actions")
      */
     private $type;
 
     /**
      * @Groups({"readertrans", "writertrans"})
+     * @Groups({"readeraction", "writeraction"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelleaction;

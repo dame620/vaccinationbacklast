@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Controller\EnfantController;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
+ * @ApiFilter(SearchFilter::class, properties={"numordre": "exact"})
  * @ApiResource(
  * collectionOperations={
  * 
@@ -41,6 +44,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Enfant
 {
     /**
+     * @Groups({"readertrans", "writertrans"})
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -54,31 +59,37 @@ class Enfant
     private $prenom;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenommere;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nommere;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresse;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $numetatcivil;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="integer", length=255, nullable=true)
      */
     private $telmere;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="date", nullable=true)
      */
     private $datenaissance;
@@ -90,56 +101,67 @@ class Enfant
     private $numordre;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nomchefquartier;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenomchefquartier;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sexe;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $telchefquartier;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $telbadiennegokh;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $etatentree;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $etatsortie;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $motifsortie;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenombadienegokh;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nombadienegokh;
@@ -154,6 +176,16 @@ class Enfant
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="enfants")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $telpere;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numvilla;
 
     public function __construct()
     {
@@ -433,6 +465,30 @@ class Enfant
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTelpere(): ?int
+    {
+        return $this->telpere;
+    }
+
+    public function setTelpere(?int $telpere): self
+    {
+        $this->telpere = $telpere;
+
+        return $this;
+    }
+
+    public function getNumvilla(): ?string
+    {
+        return $this->numvilla;
+    }
+
+    public function setNumvilla(?string $numvilla): self
+    {
+        $this->numvilla = $numvilla;
 
         return $this;
     }

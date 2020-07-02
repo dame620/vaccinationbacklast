@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Type
 {
     /**
+     * @Groups({"readertrans", "writertrans"})
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -26,6 +28,8 @@ class Type
     private $actions;
 
     /**
+     * @Groups({"readertrans", "writertrans"})
+     * @Groups({"readeraction", "writeraction"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelletype;

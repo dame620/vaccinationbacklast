@@ -152,9 +152,16 @@ class Rendezvous
      */
     private $libactionrv;
 
+    /**
+     * @Groups({"readertrans", "writertrans"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $etatrendezvous;
+
     public function __construct()
     {
         $this->etatrv = false;
+        $this->etatrendezvous="INACTIVE";
     }
    
 
@@ -352,6 +359,18 @@ class Rendezvous
     public function setLibactionrv(?string $libactionrv): self
     {
         $this->libactionrv = $libactionrv;
+
+        return $this;
+    }
+
+    public function getEtatrendezvous(): ?string
+    {
+        return $this->etatrendezvous;
+    }
+
+    public function setEtatrendezvous(?string $etatrendezvous): self
+    {
+        $this->etatrendezvous = $etatrendezvous;
 
         return $this;
     }

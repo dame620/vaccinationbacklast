@@ -40,7 +40,7 @@ class RendezvousController extends AbstractController
     //passer etat rv à true si il s'agit d'un rv effectuer  
    if($poid !== null){
     $data->setEtatrv(true);
-  
+    $data->setEtatrendezvous("VALIDER");  
      }
 
 //dd($data);
